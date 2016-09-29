@@ -1,0 +1,133 @@
+
+.add {
+	background-image: url(../images/add.gif) !important;
+}
+
+.edit {
+	background-image: url(../images/edit.gif) !important;
+}
+
+.delete {
+	background-image: url(../images/delete.gif) !important;
+}
+
+.act-post {
+	background-image: url(../images/act-post.gif) !important;
+}
+
+.stop {
+    background-image: url(../images/stop.gif) !important;
+}
+
+.query {
+    background-image: url(../images/query.gif) !important;
+}
+
+.post {
+    background-image: url(../images/post.gif) !important;
+}
+
+.export {
+    background-image: url(../images/export.gif) !important;
+}
+
+.filter {
+    background-image: url(../images/famicons/page_white_magnify.png) !important;
+}
+
+.accept {
+background-image: url(../images/famicons/accept.png) !important;
+}
+.lock_open {
+background-image: url(../images/famicons/lock_open.png) !important;
+}
+.lock {
+background-image: url(../images/famicons/lock.png) !important;
+}
+.page_refresh {
+background-image: url(../images/famicons/page_refresh.png) !important;
+}
+.page_edit {
+background-image: url(../images/famicons/page_edit.png) !important;
+}
+.page_delete {
+background-image: url(../images/famicons/page_delete.png) !important;
+}
+.page_add {
+background-image: url(../images/famicons/page_add.png) !important;
+}
+.page_excel {
+background-image: url(../images/famicons/page_excel.png) !important;
+}
+.page_export {
+background-image: url(../images/famicons/page_excel.png) !important;
+}
+.book_open{
+	background-image: url(../images/famicons/book_open.png) !important;
+}
+.page_gear{
+	background-image: url(../images/famicons/page_gear.png) !important;
+}
+.arrow_rotate_clockwise{
+	background-image: url(../images/famicons/arrow_rotate_clockwise.png) !important;
+}
+.tick{
+	background-image: url(../images/famicons/tick.png) !important;
+}
+.cross{
+	background-image: url(../images/famicons/cross.png) !important;
+}
+.arrow_turn_left{
+	background-image: url(../images/famicons/arrow_turn_left.png) !important;
+}
+.arrow_refresh{
+	background-image: url(../images/famicons/arrow_refresh.png) !important;
+}
+.page_find{
+	background-image: url(../images/famicons/page_find.png) !important;
+}
+.page_green{
+	background-image: url(../images/famicons/page_green.png) !important;
+}
+.page_save{
+	background-image: url(../images/famicons/page_save.png) !important;
+}
+.group_gear{
+	background-image: url(../images/famicons/group_gear.png) !important;
+}
+.arrow_left{
+	background-image: url(../images/famicons/arrow_left.png) !important;
+}
+.arrow_right{
+	background-image: url(../images/famicons/arrow_right.png) !important;
+}
+.arrow_up{
+	background-image: url(../images/famicons/arrow_up.png) !important;
+}
+.arrow_down{
+	background-image: url(../images/famicons/arrow_down.png) !important;
+}
+.bin_closed{
+	background-image: url(../images/famicons/bin_closed.png) !important;
+}
+.arrow_redo{
+	background-image: url(../images/famicons/arrow_redo.png) !important;
+}
+.arrow_down{
+	background-image: url(../images/famicons/arrow_down.png) !important;
+}
+.arrow_up{
+	background-image: url(../images/famicons/arrow_up.png) !important;
+}
+.page_lightning{
+	background-image: url(../images/famicons/page_lightning.png) !important;
+}
+.cart_put{
+	background-image: url(../images/famicons/cart_put.png) !important;
+}
+.cart_remove{
+	background-image: url(../images/famicons/cart_remove.png) !important;
+}
+.cart_batch_add{
+	background-image: url(../images/famicons/cart_batch_add.png) !important;
+}

@@ -1,0 +1,8 @@
+.user{ background:url(../images/user.gif) no-repeat 1px 2px; }  
+.key{ background:url(../images/famicons/textfield_key.png) no-repeat 1px 2px;  }  
+.key,.user{  
+background-color:#FFFFFF;  
+padding-left:20px;  
+font-weight:bold;  
+color:#000033;  
+}  

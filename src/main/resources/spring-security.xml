@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+<security:debug/>
+<!-- 核心 ：配置认证管理器, 指定能登陆的用户,密码,权限,状态
+     authentication-manager:注册了一个AuthenticationManager实例 
+            默认为：ProviderManager 
+     authentication-provider：注册了一个AuthenticationProvider实例，
+             默认为DaoAuthenticationProvider 读取用户信息，从UserDetailsService 中，比较用户名/密码，来进行用户登录。
+ -->
+<security:authentication-manager alias="myAuthenticationManager">
+    <security:authentication-provider user-service-ref="customUserDetailsService">
+    </security:authentication-provider>
+</security:authentication-manager>
+       <!-- 配置不拦截的资源 -->
+<security:http pattern="/index.jsp" security="none"/>
+<security:http pattern="/error/*" security="none"/>
+<security:http pattern="/common/**" security="none"/>
+<security:http pattern="/css/**" security="none"/>
+<security:http pattern="/images/**" security="none"/>
+<security:http pattern="/plugins/**" security="none"/>
+
+<security:http entry-point-ref="customLoginUrlAuthenticationEntryPoint" auto-config="false" use-expressions="true" request-matcher="ant" access-denied-page="/error/denied.jsp">
+      <security:intercept-url pattern="/**" access="hasRole('ROLE_COMMON')"/>
+      <security:custom-filter ref="customLoginFilter" position="FORM_LOGIN_FILTER"/> 
+  <security:logout delete-cookies="JSESSIONID" logout-success-url="/index.jsp" logout-url="/erp_logout" invalidate-session="true"/>       
+</security:http>
+<!-- 自定义登录过滤器 -->
+<bean  id="customLoginFilter" class="com.securitys.filter.CustomUsernamePasswordAuthenticationFilter">
+         <property name="authenticationManager" ref="myAuthenticationManager"></property>
+          <!-- 自定义登录成功后的处理handler -->
+         <property name="authenticationSuccessHandler">
+             <bean class="com.securitys.authentication.CustomAuthenticationSuccessHandler">
+                  <property name="defaultTargetUrl" value="/ui/index.jsp"></property>
+                  <property name="alwaysUseDefaultTargetUrl" value="true"></property>
+             </bean>
+         </property>
+         <!-- 自定义登录失败后的处理handler -->
+         <property name="authenticationFailureHandler">
+            <bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+                  <property name="defaultFailureUrl" value="/index.jsp"></property>
+            </bean>
+         </property>
+         <property name="sessionAuthenticationStrategy" ref="sas"></property>
+  </bean>
+  
+  <bean id="sas" class="org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy">
+                    <constructor-arg name="sessionRegistry" ref="sessionRegistry"></constructor-arg>
+                    <property name="maximumSessions" value="1"><!-- 默认值就为1，可以不设置 --></property>
+                    <property name="exceptionIfMaximumExceeded" value="true"></property>
+               </bean>
+  
+
+  
+    <bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl"></bean>
+    <!-- 指定登录界面 -->
+    <bean id="customLoginUrlAuthenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+       <constructor-arg name="loginFormUrl" value="/index.jsp"></constructor-arg>
+    </bean>
+    <bean id="customUserDetailsService" class="com.securitys.userdetails.CustomUserDetailsService"></bean>
+</beans> 

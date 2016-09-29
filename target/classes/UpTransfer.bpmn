@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/">
+  <process id="UpTransfer" name="capitalUpTransfer" isExecutable="true">
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <userTask id="commitApply" name="提交申请" activiti:assignee="${commitUser}" activiti:formKey="workflowManager/audit"></userTask>
+    <userTask id="approve_task1" name="审批【财务经理】" activiti:formKey="workflowManager/audit">
+      <extensionElements>
+        <activiti:taskListener event="create" class="com.wpf.listener.CustomTaskListener"></activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <userTask id="approve_task2" name="审批【部门经理】" activiti:formKey="workflowManager/audit">
+      <extensionElements>
+        <activiti:taskListener event="create" class="com.wpf.listener.CustomTaskListener"></activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="commitApply"></sequenceFlow>
+    <sequenceFlow id="flow2" sourceRef="commitApply" targetRef="approve_task1"></sequenceFlow>
+    <sequenceFlow id="flow3" name="批准" sourceRef="approve_task1" targetRef="approve_task2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${outcome=='批准'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow4" name="批准" sourceRef="approve_task2" targetRef="endevent1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${outcome=='批准'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow5" name="驳回" sourceRef="approve_task1" targetRef="commitApply">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${outcome=='驳回'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow6" name="驳回" sourceRef="approve_task2" targetRef="commitApply">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${outcome=='驳回'}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_UpTransfer">
+    <bpmndi:BPMNPlane bpmnElement="UpTransfer" id="BPMNPlane_UpTransfer">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="325.0" y="30.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="325.0" y="410.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="commitApply" id="BPMNShape_commitApply">
+        <omgdc:Bounds height="55.0" width="105.0" x="290.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="approve_task1" id="BPMNShape_approve_task1">
+        <omgdc:Bounds height="55.0" width="105.0" x="290.0" y="212.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="approve_task2" id="BPMNShape_approve_task2">
+        <omgdc:Bounds height="55.0" width="105.0" x="290.0" y="302.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="342.0" y="65.0"></omgdi:waypoint>
+        <omgdi:waypoint x="342.0" y="120.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="342.0" y="175.0"></omgdi:waypoint>
+        <omgdi:waypoint x="342.0" y="212.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="342.0" y="267.0"></omgdi:waypoint>
+        <omgdi:waypoint x="342.0" y="302.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="350.0" y="269.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="342.0" y="357.0"></omgdi:waypoint>
+        <omgdi:waypoint x="342.0" y="410.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="350.0" y="369.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="395.0" y="239.0"></omgdi:waypoint>
+        <omgdi:waypoint x="483.0" y="238.0"></omgdi:waypoint>
+        <omgdi:waypoint x="483.0" y="147.0"></omgdi:waypoint>
+        <omgdi:waypoint x="395.0" y="147.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="490.0" y="176.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="290.0" y="329.0"></omgdi:waypoint>
+        <omgdi:waypoint x="201.0" y="327.0"></omgdi:waypoint>
+        <omgdi:waypoint x="201.0" y="147.0"></omgdi:waypoint>
+        <omgdi:waypoint x="290.0" y="147.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="171.0" y="214.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
