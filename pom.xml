@@ -56,11 +56,11 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>
-		<!-- c3p0 -->
+		<!-- druid -->
 		<dependency>
-			<groupId>com.mchange</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.5</version>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.13</version>
 		</dependency>
 		<!--oracle ojdbc -->
 		<dependency>
@@ -114,6 +114,12 @@
 			<version>${spring.security.version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- Spring标签 -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
 		<!--支持SpringMVC的上传下载 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -147,6 +153,12 @@
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-spring</artifactId>
 			<version>${activiti.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-dbcp</groupId>
+					<artifactId>commons-dbcp</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 	<build>

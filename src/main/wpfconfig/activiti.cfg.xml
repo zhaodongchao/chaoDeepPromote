@@ -13,7 +13,7 @@
     <!-- spring负责创建流程引擎的配置文件 -->
     <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
         <!-- 数据源 -->
-        <property name="dataSource" ref="c3p0dataSource" />
+        <property name="dataSource" ref="druidDataSource" />
         <!-- 配置事务管理器，统一事务 -->
         <property name="transactionManager" ref="hibernateTransactionManager" />
         <!-- 设置建表策略，如果没有表，自动创建表 -->
