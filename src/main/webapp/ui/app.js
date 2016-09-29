@@ -5,12 +5,13 @@ Ext.Loader.setConfig({// 允许动态加载
 		'Ext.ux' : '../plugins/ext4.2.1/ux'
 	}
 });
-Ext.require(['MyExt.model.MenuModel', 'MyExt.model.TreeModel',
-		'MyExt.component.MenuManager', 'Ext.ux.TreePicker', 'Ext.ux.DataTip']);
-var basePath;
+Ext.require([ 'MyExt.model.TreeModel','MyExt.component.MenuManager', 'Ext.ux.DataTip']);
+var basePath,currentUserName ;
 Ext.onReady(function() {
 	Ext.QuickTips.init();
 	basePath = document.getElementById('basePath').value;
+	currentUserName = document.getElementById('username').value;
+	
 	var centertabpanel = Ext.create('Ext.tab.Panel', {
 				activeTab : 0,
 				enableTabScroll : true,
@@ -41,7 +42,7 @@ Ext.onReady(function() {
 		split : true,
 		bbar : [{
 					iconCls : 'icon-user',
-					text : '管理员'
+					text : currentUserName
 				}, '-', {
 					text : Ext.Date.format(new Date(), 'Y年m月d日')
 				}, '->', {

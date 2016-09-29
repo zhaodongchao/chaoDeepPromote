@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>   
+    pageEncoding="utf-8"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,8 +13,8 @@
 </title>
 </head>
 <body>
+<input type="hidden" id = "userId" value=""/>
 <input type="hidden" value="${pageContext.request.contextPath}" id="basePath"/>
-
 <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/plugins/extends-utils/DownloadExcel.js"></script>
 </body>
 </html>

@@ -1,12 +1,12 @@
 Ext.define('MyExt.component.MenuManager', {
 	extend : 'Ext.grid.Panel',
 	alias : 'widget.MenuManager',
-	height : 300,
+	requires:['MyExt.model.MenuModel','Ext.ux.TreePicker'],
+	id : 'MyExt.component.MenuManager',
 	stripeRows : true,
 	columnLines : true,
 	selModel : 'Ext.selection.CheckboxModel',
 	renderTo : Ext.getBody(),
-	id : 'UserManager.MainPanel',
 	editWindow : null,// 自定义此属性，是对grid数据添加修改的窗口
 	initComponent : function() {
 		this.store = Ext.create('Ext.data.JsonStore', {
@@ -157,12 +157,10 @@ Ext.define('MyExt.component.MenuManager', {
 
 	},
 	createEditWindow : function(operateType) {
-		var that = this ;
 		var editForm = Ext.widget({
 			xtype : 'form',
 			layout : 'form',
 			formType : operateType,
-			parent:that,
 			collapsible : false,
 			id : 'menuManager.form',
 			frame : true,
@@ -266,9 +264,7 @@ Ext.define('MyExt.component.MenuManager', {
 								}),
 						listeners : {
 							select : function(that, record, dd) {
-								this.up('form').getForm()
-										.findField('menuLevel')
-										.setValue(record.raw.level + 1);
+								this.up('form').getForm().findField('menuLevel').setValue(record.raw.level + 1);
 							}
 						}
 
@@ -296,7 +292,7 @@ Ext.define('MyExt.component.MenuManager', {
 							scope:this,
 							success : function(form, action) {
 								if (action.result.success) {
-									realForm.parent.store.load();
+									Ext.data.StoreManager.lookup('menuStore').load();
 									Ext.getCmp('menuManager.editWindow').close();
 									Ext.Msg.alert('Success', action.result.msg);
 								} else {
