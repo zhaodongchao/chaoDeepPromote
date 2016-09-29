@@ -114,12 +114,6 @@
 			<version>${spring.security.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- Spring标签 -->
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-taglibs</artifactId>
-			<version>${spring.security.version}</version>
-		</dependency>
 		<!--支持SpringMVC的上传下载 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
