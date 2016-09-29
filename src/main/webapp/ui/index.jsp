@@ -13,7 +13,7 @@
 </title>
 </head>
 <body>
-<input type="hidden" id = "userId" value=""/>
+<input type="hidden" id = "username" value="${currentUsername}"/>
 <input type="hidden" value="${pageContext.request.contextPath}" id="basePath"/>
 <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/plugins/extends-utils/DownloadExcel.js"></script>
 </body>

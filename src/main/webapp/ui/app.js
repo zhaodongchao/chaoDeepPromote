@@ -42,7 +42,7 @@ Ext.onReady(function() {
 		split : true,
 		bbar : [{
 					iconCls : 'icon-user',
-					text : currentUserName
+					text : '欢迎您 ！'+currentUserName
 				}, '-', {
 					text : Ext.Date.format(new Date(), 'Y年m月d日')
 				}, '->', {

@@ -40,11 +40,8 @@ public class CustomUsernamePasswordAuthenticationFilter extends AbstractAuthenti
     
     public static final String ERR_VAILDATECODE = "验证码输入错误";
     public static final String ERR_USERNAMEANDPASSWORD = "用户或密码错误" ;
-    /**
-     * @deprecated If you want to retain the username, cache it in a customized {@code AuthenticationFailureHandler}
-     */
-    @Deprecated
-    public static final String SPRING_SECURITY_LAST_USERNAME_KEY = "SPRING_SECURITY_LAST_USERNAME";
+   
+    public static final String SPRING_SECURITY_CURRENT_USERNAME = "currentUsername";
 
     private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
     private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
@@ -82,7 +79,7 @@ public class CustomUsernamePasswordAuthenticationFilter extends AbstractAuthenti
 	        HttpSession session = request.getSession(false);
 	 
 	        if (session != null || getAllowSessionCreation()) {
-	            request.getSession().setAttribute(SPRING_SECURITY_LAST_USERNAME_KEY,"");
+	            request.getSession().setAttribute(SPRING_SECURITY_CURRENT_USERNAME,username);
 	        }
 	        
 	     // Allow subclasses to set the "details" property
