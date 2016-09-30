@@ -110,5 +110,6 @@
 			id="pointCuts" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointCuts" />
 	</aop:config>
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
 	<import resource="classpath:activiti.cfg.xml" />
 </beans>

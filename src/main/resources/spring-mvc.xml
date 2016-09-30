@@ -9,13 +9,21 @@
 	 <!-- 自动扫描bean，把作了注解的类转换为bean , 存在于springMVC的ioc容器中--> 
 	<context:component-scan base-package="com.xiaochu.handler,com.wpf.handler,com.base.export.handler"/>
 	
+	<!--静态资源映射-->
+	<mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
+	<mvc:resources location="/images/" mapping="/images/**"></mvc:resources>
+	<mvc:resources location="/plugins/" mapping="/plugins/**"></mvc:resources>
+	<mvc:resources location="/ui/src/" mapping="/ui/src/*/*.js"></mvc:resources>
+    <!-- 处理静态资源  ,当访问上面的映射之外的静态资源时，使用SpringMVC默认的servlet处理 -->
+    <mvc:default-servlet-handler/>
+    
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
 		<property name="prefix" value="/"></property>
 		<property name="suffix" value=".jsp"></property>
 		<property name="contentType" value="text/html;charset=UTF-8"></property>
 	</bean>
-    <!-- 处理静态资源 -->
-    <mvc:default-servlet-handler/>
+    
     <!-- 使用此标签后，会自动注册ExceptionHandlerExceptionResolver，用于异常的处理 -->
 	<mvc:annotation-driven conversion-service="customConcersionService"/>
 	<!-- 自定义SpringMVC handler的方法的参数的绑定 -->
